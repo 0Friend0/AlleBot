@@ -75,15 +75,6 @@ class Application():
             log.debug('Checking the ' + str(Ap.item_counter + 1) + ' item.')
 
             try:
-                # Getting item name
-                # item_name = Ap.get_item_name()
-                # n = ws["A" + str(Ap.item_counter + 2)]
-                # n.value = item_name
-
-                # Getting item price
-                # item_price = Ap.get_price()
-                # p = ws["B" + str(Ap.item_counter + 2)]
-                # p.value = item_price
 
                 # Getting link to item
                 item_link = Ap.get_link()
