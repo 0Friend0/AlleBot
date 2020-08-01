@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from openpyxl import Workbook, load_workbook
 import time
@@ -13,7 +15,7 @@ class Application():
     item_counter = 0
     page_index = 1
     item = 0
-    driver = webdriver.Chrome(executable_path='D:\\Skrypty_Adrian\\AllegroBotWebsite\\chromedriver.exe')
+    driver = webdriver.Chrome(executable_path='D:\\Skrypty_Adrian\\AlleBotWebsite\\chromedriver.exe')
     driver.minimize_window()
 
     def open(self, item_to_search):
@@ -34,13 +36,43 @@ class Application():
         element = self.driver.find_element(By.XPATH,
                                            "//input [@type='search' and contains (@placeholder, 'czego szukasz?')]")
 
-        for letter in item_to_search:
+
+        for letter in str(item_to_search).split('value="')[1][:-2]:
             x = random.uniform(0.1, 0.5)
             time.sleep(x)
             element.send_keys(letter)
 
         element.submit()
-        log.info('Looking for ' + item_to_search)
+        log.info('Looking for ' + str(item_to_search).split('value="')[1][:-2])
+
+
+    def additional_filter_price(self, price_min, price_max):
+
+        if price_min is not None:
+            element = self.driver.find_element(By.XPATH, '//div/input [@id="price_from"]')
+            log.info(price_min)
+            element.send_keys("price_min " + price_min)
+            time.sleep(1)
+
+        if price_max is not None:
+            log.info(price_max)
+            element = self.driver.find_element(By.XPATH, '//div/input [@id="price_to"]')
+            element.send_keys("price_max " + price_max)
+            time.sleep(1)
+
+        try:
+            element = self.driver.find_element(By.XPATH, '//div [@class="_9c44d_378hD _9c44d_3TOu4"]')
+            WebDriverWait(self.driver, 3).until(EC.visibility_of(element))
+
+        except NoSuchElementException:
+            pass
+
+        finally:
+            element = self.driver.find_element(By.XPATH, '//div [@class="_9c44d_378hD"]')
+            element = WebDriverWait(self.driver, 3).until(EC.visibility_of(element))
+
+
+
 
     def create_excel_file(self):
 
@@ -106,6 +138,9 @@ class Application():
 
     def check_next_page(self):
         page = self.driver.find_element(By.XPATH, "//div [@data-prototype-id='allegro.pagination']/div/div/div/span")
+        actions = ActionChains(self.driver)
+        actions.move_to_element(page).perform()
+
         page_count = page.get_attribute("textContent")
         if Ap.page_index < int(page_count):
             element = self.driver.find_element(By.XPATH,
@@ -115,25 +150,6 @@ class Application():
             return True
         else:
             return False
-
-    def get_item_name(self):
-        # try:
-            element = self.driver.find_element(By.XPATH,
-                                               "//article [@data-analytics-view-custom-page = '" + str(
-                                                   Ap.page_index) + "' and @data-analytics-view-custom-index0 = '" + str(
-                                                   Ap.item) + "']/div/div/div[2]/div[1]/h2/a")
-            name = element.get_attribute("textContent")
-            return str(name)
-        # except UnicodeEncodeError:
-        #     return self.item_to_search
-
-    def get_price(self):
-        element = self.driver.find_element(By.XPATH,
-                                           "//article [@data-analytics-view-custom-page = '" + str(
-                                               Ap.page_index) + "' and @data-analytics-view-custom-index0 = '" + str(
-                                               Ap.item) + "']/div/div/div[2]/div[2]//span")
-        price = element.get_attribute("textContent")
-        return str(price)
 
     def get_link(self):
         element = self.driver.find_element(By.XPATH,

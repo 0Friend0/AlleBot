@@ -7,15 +7,12 @@ import random
 from functions import Application
 from additionalData import AuctionData
 
-def start(item):
-    look_for_item(item)
-
-
-def look_for_item(item):
+def start(item, price_min, price_max):
     Ap = Application()
     ad = AuctionData()
 
     Ap.open(item)
+    Ap.additional_filter_price(price_min, price_max)
     Ap.create_excel_file()
     Ap.finding_items()
     Ap.driver_close()

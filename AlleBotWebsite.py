@@ -1,10 +1,12 @@
 from flask import Flask, redirect, url_for, render_template, request
 import webbrowser
+from forms import Items
+
 from multiprocessing import Process
 
 app = Flask(__name__)
 
-
+app.config['SECRET_KEY'] = '49da76022ba58ab12e7d38e6547949fe'
 
 @app.route("/")
 def home():
@@ -13,16 +15,16 @@ def home():
 
 @app.route("/find", methods=["POST", "GET"])
 def find():
-    if request.method == "POST":
 
-        item = request.form["item"]
-        submit = request.form["value"]
-
+    form = Items()
+    if form.validate_on_submit():
+        price_min = form.price_min.data
+        price_max = form.price_max.data
         from Main import start
-        start(item)
+        start(form.item, price_min, price_max)
         return redirect(url_for('result'))
-    else:
-        return render_template("basic.html")
+
+    return render_template("find.html", form = form)
 
 @app.route("/results")
 def result():

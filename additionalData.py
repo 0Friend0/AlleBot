@@ -35,8 +35,7 @@ class AuctionData():
 
         auction_info = ad.get_auction_info(url)
 
-
-        item_data = [auction_info[0], auction_info[1], auction_info[2], auction_info[3]]
+        item_data = [auction_info[0], auction_info[1], auction_info[2], auction_info[3], url]
         ad.data_list.append(item_data)
 
     def generate_auction_link_list(self):
@@ -52,6 +51,7 @@ class AuctionData():
                 link = aew.active['C' + str(ad.counter + 1)].value
                 ad.links.append(link)
                 ad.counter += 1
+
 
         aew.save("allegro.xlsx")
 
@@ -72,11 +72,16 @@ class AuctionData():
             # Add auction price
             aew.active["B" + str(ad.counter + 1)] = item[1]
 
+            # Replace auction URL
+            aew.active["C" + str(ad.counter + 1)] = item[4]
+
             # Add seller name
             aew.active["D" + str(ad.counter + 1)] = item[2]
 
             # Add seller % comments
             aew.active["E" + str(ad.counter + 1)] = item[3]
+
+
 
             # Increase counter
             ad.counter += 1
