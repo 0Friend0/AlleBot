@@ -21,7 +21,8 @@ def find():
         price_min = form.price_min.data
         price_max = form.price_max.data
         from Main import start
-        start(form.item, price_min, price_max)
+        global item_count
+        item_count = start(form.item.data, price_min, price_max)
         return redirect(url_for('result'))
 
     return render_template("find.html", form = form)
@@ -29,12 +30,12 @@ def find():
 @app.route("/results")
 def result():
 
-    return render_template("results.html")
+    return render_template("results.html", item_count=item_count)
 
-@app.route("/additional")
+@app.route("/about")
 def additional():
 
-    return render_template("additional.html")
+    return render_template("about.html")
 
 
 def start_server():

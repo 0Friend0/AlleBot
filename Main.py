@@ -1,19 +1,22 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-import time
-import random
 from functions import Application
 from additionalData import AuctionData
 
 def start(item, price_min, price_max):
+
     Ap = Application()
     ad = AuctionData()
 
+    # Open WebDriver, load Allegro.pl website and search for item.
     Ap.open(item)
+    # Insert additional filters to Allegro.pl.
     Ap.additional_filter_price(price_min, price_max)
-    Ap.create_excel_file()
-    Ap.finding_items()
+    # Create excel file.
+    Ap.create_excel_file(item)
+    # Find items.
+    Ap.finding_items(item)
+    # Close driver
     Ap.driver_close()
-    ad.gets_auction_info_master()
+    # Get auction info for every item found. Returns how many items were found.
+    item_count = ad.gets_auction_info_master(item)
+
+    return item_count

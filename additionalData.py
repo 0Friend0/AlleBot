@@ -38,10 +38,10 @@ class AuctionData():
         item_data = [auction_info[0], auction_info[1], auction_info[2], auction_info[3], url]
         ad.data_list.append(item_data)
 
-    def generate_auction_link_list(self):
+    def generate_auction_link_list(self, item_to_search):
         # Creates a list of URL from excel file
 
-        aew = load_workbook("allegro.xlsx")
+        aew = load_workbook(item_to_search + ".xlsx")
         aew.active = -1
 
         while True:
@@ -53,14 +53,14 @@ class AuctionData():
                 ad.counter += 1
 
 
-        aew.save("allegro.xlsx")
+        aew.save(item_to_search + ".xlsx")
 
 
-    def add_to_excel(self):
+    def add_to_excel(self, item_to_search):
         # Add final auction data to excel
 
 
-        aew = load_workbook("allegro.xlsx")
+        aew = load_workbook(item_to_search + ".xlsx")
         aew.active = -1
         ad.counter = 1
 
@@ -86,19 +86,21 @@ class AuctionData():
             # Increase counter
             ad.counter += 1
 
-            aew.save("allegro.xlsx")
+            aew.save(item_to_search + ".xlsx")
 
-        aew.save("allegro.xlsx")
+        aew.save(item_to_search + ".xlsx")
 
-    def gets_auction_info_master(self):
+    def gets_auction_info_master(self, item_to_search):
 
-        ad.generate_auction_link_list()
+        ad.generate_auction_link_list(item_to_search)
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
          executor.map(ad.generate_items_list, ad.links)
 
-        ad.add_to_excel()
+        ad.add_to_excel(item_to_search)
 
+        item_count = ad.counter - 1
+        return item_count
 
 ad = AuctionData()
 
