@@ -3,7 +3,8 @@ import requests
 from openpyxl import load_workbook
 import concurrent.futures
 
-class AuctionData():
+
+class AuctionData:
 
     data_list = []
     links = []

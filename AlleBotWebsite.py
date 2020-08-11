@@ -1,12 +1,12 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, session
 import webbrowser
+import os
 from forms import Items
-
 from multiprocessing import Process
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '49da76022ba58ab12e7d38e6547949fe'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 @app.route("/")
 def home():
@@ -21,8 +21,8 @@ def find():
         price_min = form.price_min.data
         price_max = form.price_max.data
         from Main import start
-        global item_count
         item_count = start(form.item.data, price_min, price_max)
+        session["item_count"] = item_count
         return redirect(url_for('result'))
 
     return render_template("find.html", form = form)
@@ -30,7 +30,7 @@ def find():
 @app.route("/results")
 def result():
 
-    return render_template("results.html", item_count=item_count)
+    return render_template("results.html", item_count= session["item_count"])
 
 @app.route("/about")
 def additional():
