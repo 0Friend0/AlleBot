@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70575787-cc50-4188-872c-519def74cf55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AlleBotLog.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bannerlord.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlleBotWebsite.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlleBotWebsite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/additionalData.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuctionData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
