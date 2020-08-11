@@ -12,7 +12,7 @@ import datetime
 from loggingFile import loggingFunction
 
 
-class Application():
+class Application:
     item_counter = 0
     page_index = 1
     item = 0
@@ -172,3 +172,4 @@ class Application():
 
 log = loggingFunction()
 Ap = Application()
+

@@ -1,5 +1,5 @@
-from functions import Application
-from additionalData import AuctionData
+from Application import Application
+from AuctionData import AuctionData
 
 def start(item, price_min, price_max):
 

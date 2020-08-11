@@ -3,3 +3,4 @@ allegro.xlsx
 chromedriver.exe
 AllegroBot.log
 Website/
+__pycache__/
