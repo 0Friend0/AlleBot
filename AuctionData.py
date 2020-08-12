@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from openpyxl import load_workbook
+from Application import Application
 import concurrent.futures
 
 
@@ -42,7 +43,7 @@ class AuctionData:
     def generate_auction_link_list(self, item_to_search):
         # Creates a list of URL from excel file
 
-        aew = load_workbook(item_to_search + ".xlsx")
+        aew = load_workbook(Ap.path_to_results_folder(item_to_search))
         aew.active = -1
 
         while True:
@@ -54,14 +55,14 @@ class AuctionData:
                 ad.counter += 1
 
 
-        aew.save(item_to_search + ".xlsx")
+        aew.save(Ap.path_to_results_folder(item_to_search))
 
 
     def add_to_excel(self, item_to_search):
         # Add final auction data to excel
 
 
-        aew = load_workbook(item_to_search + ".xlsx")
+        aew = load_workbook(Ap.path_to_results_folder(item_to_search))
         aew.active = -1
         ad.counter = 1
 
@@ -87,9 +88,9 @@ class AuctionData:
             # Increase counter
             ad.counter += 1
 
-            aew.save(item_to_search + ".xlsx")
+            aew.save(Ap.path_to_results_folder(item_to_search))
 
-        aew.save(item_to_search + ".xlsx")
+        aew.save(Ap.path_to_results_folder(item_to_search))
 
     def gets_auction_info_master(self, item_to_search):
 
@@ -104,4 +105,5 @@ class AuctionData:
         return item_count
 
 ad = AuctionData()
+Ap = Application()
 

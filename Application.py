@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from openpyxl import Workbook, load_workbook
 from chromedriver_path import chromedriverpath
+import os
 import time
 import random
 import datetime
@@ -19,6 +20,11 @@ class Application:
     chromedriver_path = chromedriverpath()
     driver = webdriver.Chrome(executable_path=chromedriver_path)
     driver.minimize_window()
+
+    dirname, filename = os.path.split(os.path.abspath(__file__))
+
+    excel_path = os.path.join(dirname, "Results")
+    excel_path_full = os.path.join(chromedriver_path, ".xlsx")
 
     def open(self, item_to_search):
 
@@ -79,8 +85,14 @@ class Application:
             element = self.driver.find_element(By.XPATH, '//div [@class="_9c44d_378hD"]')
             element = WebDriverWait(self.driver, 3).until(EC.visibility_of(element))
 
+    def path_to_results_folder(self, item_to_search):
+        dirname, filename = os.path.split(os.path.abspath(__file__))
 
+        excel_path = os.path.join(dirname, "Results")
+        excel_item_name = item_to_search + ".xlsx"
+        excel_path_full = os.path.join(excel_path, excel_item_name)
 
+        return excel_path_full
 
     def create_excel_file(self, item_to_search):
 
@@ -89,7 +101,7 @@ class Application:
         today_fix = today.strftime("%d %m %Y")
 
         try:
-            aew = load_workbook(item_to_search + ".xlsx")
+            aew = load_workbook(Ap.path_to_results_folder(item_to_search))
             ws = aew.create_sheet(today_fix)
 
         except FileNotFoundError:
@@ -101,10 +113,10 @@ class Application:
         ws['C1'] = "Auction link"
         ws['D1'] = "Seller name"
         ws['E1'] = "Positive comments"
-        aew.save(item_to_search + ".xlsx")
+        aew.save(Ap.path_to_results_folder(item_to_search))
 
     def finding_items(self, item_to_search):
-        aew = load_workbook(item_to_search + ".xlsx")
+        aew = load_workbook(Ap.path_to_results_folder(item_to_search))
         last_sheet = aew.sheetnames[-1]
         ws = aew[last_sheet]
         Ap.item = 0
@@ -124,7 +136,7 @@ class Application:
                 continue
             Ap.item_counter += 1
             Ap.item += 1
-        aew.save(item_to_search + ".xlsx")
+        aew.save(Ap.path_to_results_folder(item_to_search))
 
         # Checking if next page of items is available.
         if Ap.check_next_page():
@@ -172,4 +184,3 @@ class Application:
 
 log = loggingFunction()
 Ap = Application()
-

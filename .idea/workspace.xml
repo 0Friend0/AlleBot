@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="70575787-cc50-4188-872c-519def74cf55" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuctionData.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuctionData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bannerlord.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chromedriver_path.py" beforeDir="false" afterPath="$PROJECT_DIR$/chromedriver_path.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +52,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.chromedriver_path">
-    <configuration name="additionalData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Application">
+    <configuration name="Application" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AllegroBot" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -61,7 +65,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\Skrypty_Adrian\AlleBotWebsite\AuctionData.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Application.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -156,11 +160,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Application" />
         <item itemvalue="Python.chromedriver_path" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.testFile" />
         <item itemvalue="Python.forms" />
-        <item itemvalue="Python.additionalData" />
       </list>
     </recent_temporary>
   </component>

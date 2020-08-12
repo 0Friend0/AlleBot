@@ -1,8 +1,8 @@
-import os, sys
+import os
 
 def chromedriverpath():
 
-    dirname, filename = os.path.split(os.path.abspath(sys.argv[0]))
+    dirname, filename = os.path.split(os.path.abspath(__file__))
 
     chromedriver_path =  os.path.join(dirname, "chromedriver.exe")
 
